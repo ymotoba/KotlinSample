@@ -21,6 +21,7 @@ import com.example.kotlin.view.component.TitleToolBarView
 import com.example.kotlin.view.extension.redButtonComponent
 import com.example.kotlin.view.extension.sampleButton
 import com.example.kotlin.viewmodel.MainActivityViewModel
+import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.k_name
 import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.k_sampleButtonClick
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.appBarLayout
@@ -78,7 +79,7 @@ class MainActivity : BaseActivity() {
                     nestedScrollView {
                         verticalLayout {
                             textView {
-                                bind { text("name", mode = OneWay) }
+                                bind { text(k_name, mode = OneWay) }
                             }.lparams(matchParent, wrapContent)
                             button("テストボタン") {
                                 bind { click(k_sampleButtonClick) }
