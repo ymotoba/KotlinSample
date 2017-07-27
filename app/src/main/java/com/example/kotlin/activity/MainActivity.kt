@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
@@ -35,6 +36,7 @@ import kotlin.reflect.KClass
 class MainActivity : BaseActivity() {
 
     lateinit var toolBar: Toolbar
+    lateinit var drawerLayout: DrawerLayout
     var mainActivityViewModel: MainActivityViewModel = MainActivityViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,11 @@ class MainActivity : BaseActivity() {
         toolBar.setNavigationIcon(android.R.drawable.sym_def_app_icon)
         toolBar.setNavigationOnClickListener {
             Log.d("MainActivity", "NavigationOnClick!!!")
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
         }
     }
 
@@ -71,7 +78,7 @@ class MainActivity : BaseActivity() {
 
     inner class MainActivityUI : ViewBinderComponent<MainActivity> {
         override fun builder(): AnkoContext<out MainActivity>.() -> Unit = {
-            drawerLayout {
+            drawerLayout = drawerLayout {
                 coordinatorLayout {
                     appBarLayout {
                         toolBar = inflate(TitleToolBarView("home"), this@appBarLayout) as Toolbar
