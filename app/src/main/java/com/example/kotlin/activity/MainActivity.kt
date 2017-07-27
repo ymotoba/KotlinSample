@@ -61,6 +61,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            // TODO compilation error occurs...
 //            R.id.nav_camera -> verbose("-> camera")
 //            R.id.nav_gallery -> debug("-> gallery")
 //            R.id.nav_slideshow -> info("-> slideshow")
