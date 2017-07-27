@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
@@ -43,6 +44,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
         setSupportActionBar(toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(false)
+        supportActionBar?.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
         toolBar.setNavigationIcon(android.R.drawable.sym_def_app_icon)
         toolBar.setNavigationOnClickListener {
             Log.d("MainActivity", "NavigationOnClick!!!")
