@@ -64,6 +64,8 @@ dependencies {
     anko.each { name ->
         compile "org.jetbrains.anko:anko-$name:0.10.1"
     }
+
+    compile 'com.sackcentury:shinebutton:0.1.9'
 }
 
 kapt {

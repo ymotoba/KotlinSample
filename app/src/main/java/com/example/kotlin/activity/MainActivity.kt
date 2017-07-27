@@ -1,5 +1,6 @@
 package com.example.kotlin.activity
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.view.GravityCompat
@@ -7,6 +8,7 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import com.benny.library.kbinding.common.bindings.click
@@ -21,6 +23,7 @@ import com.example.kotlin.view.component.NavHeaderComponent
 import com.example.kotlin.view.component.TitleToolBarView
 import com.example.kotlin.view.extension.redButtonComponent
 import com.example.kotlin.view.extension.sampleButton
+import com.example.kotlin.view.extension.shineButton
 import com.example.kotlin.viewmodel.MainActivityViewModel
 import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.k_name
 import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.k_sampleButtonClick
@@ -63,7 +66,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            // TODO compilation error occurs...
+        // TODO compilation error occurs...
 //            R.id.nav_camera -> verbose("-> camera")
 //            R.id.nav_gallery -> debug("-> gallery")
 //            R.id.nav_slideshow -> info("-> slideshow")
@@ -97,6 +100,13 @@ class MainActivity : BaseActivity(), AnkoLogger {
                             }.lparams(matchParent, wrapContent)
                             redButtonComponent() {
                             }.lparams(matchParent, wrapContent)
+                            shineButton {
+                                setBtnColor(Color.GRAY)
+                                setBtnFillColor(Color.RED)
+                                setShapeResource(R.drawable.heart)
+                            }.lparams(dip(40), dip(40)) {
+                                gravity = Gravity.CENTER_HORIZONTAL
+                            }
                         }
                     }.lparams(matchParent, matchParent) {
                         behavior = AppBarLayout.ScrollingViewBehavior()
