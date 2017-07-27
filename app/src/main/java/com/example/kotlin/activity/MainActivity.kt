@@ -1,17 +1,13 @@
 package com.example.kotlin.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.FrameLayout
 import com.benny.library.kbinding.common.bindings.click
 import com.benny.library.kbinding.common.bindings.text
 import com.benny.library.kbinding.dsl.OneWay
@@ -33,10 +29,9 @@ import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.navigationView
 import org.jetbrains.anko.support.v4.drawerLayout
 import org.jetbrains.anko.support.v4.nestedScrollView
-import kotlin.reflect.KClass
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), AnkoLogger {
 
     lateinit var toolBar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -64,19 +59,17 @@ class MainActivity : BaseActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_settings -> {
-            onBackPressed(); true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+//            R.id.nav_camera -> verbose("-> camera")
+//            R.id.nav_gallery -> debug("-> gallery")
+//            R.id.nav_slideshow -> info("-> slideshow")
+//            R.id.nav_manage -> warn("-> manage")
+//            R.id.nav_share -> error("-> share")
+//            R.id.nav_send -> wtf("-> send")
         }
-        else -> super.onOptionsItemSelected(item)
-    }
-
-    fun <T : Activity> Activity.startActivity(classRef: KClass<T>, bundle: Bundle? = null) {
-        val intent = Intent(this, classRef.java).setAction(Intent.ACTION_VIEW)
-        bundle?.let {
-            intent.putExtra("args", bundle)
-        }
-        startActivity(intent)
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
     inner class MainActivityUI : ViewBinderComponent<MainActivity> {

@@ -1,11 +1,15 @@
 package com.example.kotlin.activity
 
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
 import com.benny.library.kbinding.bind.BindingDelegate
 import com.benny.library.kbinding.bind.BindingDisposer
 import com.benny.library.kbinding.view.BindingDisposerGenerator
 import com.benny.library.kbinding.viewmodel.ViewModel
+import org.jetbrains.anko.AnkoLogger
+import kotlin.reflect.KClass
 
 open class BaseActivity : AppCompatActivity(), BindingDisposerGenerator, BindingDelegate {
     override val viewModel: ViewModel = ViewModel()
@@ -16,10 +20,11 @@ open class BaseActivity : AppCompatActivity(), BindingDisposerGenerator, Binding
         bindingDisposer.unbind()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        android.R.id.home -> {
-            onBackPressed(); true
+    fun <T : Activity> Activity.startActivity(classRef: KClass<T>, bundle: Bundle? = null) {
+        val intent = Intent(this, classRef.java).setAction(Intent.ACTION_VIEW)
+        bundle?.let {
+            intent.putExtra("args", bundle)
         }
-        else -> super.onOptionsItemSelected(item)
+        startActivity(intent)
     }
 }
