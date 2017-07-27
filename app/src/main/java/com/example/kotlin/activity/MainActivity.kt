@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.FrameLayout
 import com.benny.library.kbinding.common.bindings.click
 import com.benny.library.kbinding.common.bindings.text
 import com.benny.library.kbinding.dsl.OneWay
@@ -18,6 +20,7 @@ import com.benny.library.kbinding.dsl.inflate
 import com.benny.library.kbinding.view.ViewBinderComponent
 import com.benny.library.kbinding.view.setContentView
 import com.example.kotlin.R
+import com.example.kotlin.view.component.NavHeaderComponent
 import com.example.kotlin.view.component.TitleToolBarView
 import com.example.kotlin.view.extension.redButtonComponent
 import com.example.kotlin.view.extension.sampleButton
@@ -105,10 +108,19 @@ class MainActivity : BaseActivity() {
                 }.lparams(matchParent, matchParent)
                 navigationView {
                     fitsSystemWindows = true
-                    inflateHeaderView(R.layout.nav_header_main)
+                    val headerContext = AnkoContext.create(ctx, this)
+                    val headerView = NavHeaderComponent()
+                            .createView(headerContext)
+                    addHeaderView(headerView)
                     inflateMenu(R.menu.activity_main_drawer)
                 }.lparams(wrapContent, matchParent, GravityCompat.START)
             }
         }
     }
 }
+
+//verticalLayout {
+//    backgroundDrawable = ContextCompat.getDrawable(this@MainActivity, R.drawable.side_nav_bar)
+//}.layoutParams = with(FrameLayout.LayoutParams(matchParent, dimen(R.dimen.nav_header_height))) {
+//    this
+//}
