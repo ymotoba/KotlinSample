@@ -39,6 +39,7 @@ class MainActivityViewModel() : ViewModel() {
                     if (responseJsonData != null) {
                         for (user in responseJsonData) {
                             Log.d("apiUsersButtonClick", "result = ${user.toString()}")
+                            name = user.name
                         }
                     }
                     result.component2()
