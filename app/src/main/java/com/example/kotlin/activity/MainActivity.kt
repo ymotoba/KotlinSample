@@ -21,12 +21,12 @@ import com.benny.library.kbinding.view.setContentView
 import com.example.kotlin.R
 import com.example.kotlin.view.component.NavHeaderComponent
 import com.example.kotlin.view.component.TitleToolBarView
+import com.example.kotlin.view.extension.checkedChange
 import com.example.kotlin.view.extension.redButtonComponent
 import com.example.kotlin.view.extension.sampleButton
 import com.example.kotlin.view.extension.shineButton
 import com.example.kotlin.viewmodel.MainActivityViewModel
-import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.k_name
-import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.k_sampleButtonClick
+import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.appBarLayout
 import org.jetbrains.anko.design.coordinatorLayout
@@ -104,6 +104,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
                                 setBtnColor(Color.GRAY)
                                 setBtnFillColor(Color.RED)
                                 setShapeResource(R.drawable.heart)
+                                bind { checkedChange(k_shineButtonCheckedChange) }
                             }.lparams(dip(40), dip(40)) {
                                 gravity = Gravity.CENTER_HORIZONTAL
                             }

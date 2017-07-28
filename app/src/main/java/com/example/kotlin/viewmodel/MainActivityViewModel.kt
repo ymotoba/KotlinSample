@@ -15,5 +15,10 @@ class MainActivityViewModel() : ViewModel() {
     fun sampleButtonClick() {
         Log.d("MainActivityViewModel", "sampleButtonClick!!!")
     }
+
+    @Command
+    fun shineButtonCheckedChange(checked : Boolean) {
+        Log.d("MainActivityViewModel", "shineButtonCheckedChange $checked")
+    }
 }
 
