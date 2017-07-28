@@ -108,6 +108,10 @@ class MainActivity : BaseActivity(), AnkoLogger {
                             }.lparams(dip(40), dip(40)) {
                                 gravity = Gravity.CENTER_HORIZONTAL
                             }
+                            sampleButton {
+                                text = "users api"
+                                bind { click(k_apiUsersButtonClick) }
+                            }.lparams(matchParent, wrapContent)
                         }
                     }.lparams(matchParent, matchParent) {
                         behavior = AppBarLayout.ScrollingViewBehavior()

@@ -20,5 +20,9 @@ class MainActivityViewModel() : ViewModel() {
     fun shineButtonCheckedChange(checked : Boolean) {
         Log.d("MainActivityViewModel", "shineButtonCheckedChange $checked")
     }
-}
 
+    @Command
+    fun apiUsersButtonClick() {
+        Log.d("MainActivityViewModel", "apiUsersButtonClick!!!")
+    }
+}
