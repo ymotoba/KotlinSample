@@ -110,7 +110,7 @@ class MainActivity : BaseActivity(), AnkoLogger {
                             }
                             sampleButton {
                                 text = "users api"
-                                bind { click(k_apiUsersButtonClick) }
+                                bind { click(k_getSampleButtonClick) }
                             }.lparams(matchParent, wrapContent)
                         }
                     }.lparams(matchParent, matchParent) {
