@@ -7,3 +7,5 @@ Kotlin sample app.
    - https://github.com/BennyWang/KBinding
  - Anko
    - https://github.com/Kotlin/anko
+ - Fuel
+   - https://github.com/kittinunf/Fuel

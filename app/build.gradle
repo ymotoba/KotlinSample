@@ -65,6 +65,11 @@ dependencies {
         compile "org.jetbrains.anko:anko-$name:0.10.1"
     }
 
+    def fuel = ['fuel', 'fuel-android', 'fuel-rxjava', 'fuel-livedata', 'fuel-gson']
+    fuel.each { name ->
+        compile "com.github.kittinunf.fuel:$name:1.9.0"
+    }
+
     compile 'com.sackcentury:shinebutton:0.1.9'
 }
 
@@ -74,4 +79,5 @@ kapt {
 
 repositories {
     mavenCentral()
+    maven { url 'https://maven.google.com' }
 }
