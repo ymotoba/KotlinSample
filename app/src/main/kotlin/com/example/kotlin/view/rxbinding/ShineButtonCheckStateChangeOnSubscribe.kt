@@ -13,7 +13,7 @@ class ShineButtonCheckStateChangeOnSubscribe private constructor(private val shi
     override fun call(subscriber: Subscriber<in Boolean>) {
         checkUiThread()
 
-        shineButton.setOnCheckStateChangeListener { view, checked ->
+        shineButton.setOnCheckStateChangeListener { _, checked ->
             if (!subscriber.isUnsubscribed) {
                 subscriber.onNext(checked)
             }

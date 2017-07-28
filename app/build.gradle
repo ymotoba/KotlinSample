@@ -4,6 +4,9 @@ apply plugin: 'kotlin-kapt'
 
 def PACKAGE_NAME = 'com.example.kotlin'
 android {
+    packagingOptions {
+        exclude 'META-INF/*'
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
     dataBinding {
