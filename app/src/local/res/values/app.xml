@@ -1,3 +1,4 @@
 <resources>
+    <string name="app_name">Local KotlinSample!</string>
     <string name="api_base">http://10.0.2.2:3000</string>
 </resources>

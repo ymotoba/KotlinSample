@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">KotlinSample!</string>
+    <string name="api_base">https://enm-api-production-domain</string>
+</resources>
