@@ -1,9 +1,11 @@
 package com.example.kotlin.viewmodel
 
 import android.util.Log
+import android.view.MenuItem
 import com.benny.library.kbinding.annotation.Command
 import com.benny.library.kbinding.annotation.Property
 import com.benny.library.kbinding.viewmodel.ViewModel
+import com.example.kotlin.R
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.rx.rx_object
@@ -14,6 +16,8 @@ import java.io.Reader
 import kotlin.properties.Delegates
 
 class MainActivityViewModel() : ViewModel() {
+
+    // TODO ViewModelにはContext持たせる
 
     @delegate:Property
     var name: String by Delegates.property("hoge@example.com")
@@ -45,6 +49,25 @@ class MainActivityViewModel() : ViewModel() {
                     result.component2()
                 }
     }
+
+    @Command
+    fun bottomNavigationItemSelect(item: MenuItem) {
+        when (item.itemId) {
+            (R.id.item1) -> {
+                Log.d("SampleApp", "R.id.item1")
+            }
+            (R.id.item2) -> {
+                Log.d("SampleApp", "R.id.item2")
+            }
+            (R.id.item3) -> {
+                Log.d("SampleApp", "R.id.item3")
+            }
+            else -> {
+                Log.d("SampleApp", "unknown item")
+            }
+        }
+    }
+
 
     data class User(
             val id: Long,

@@ -21,14 +21,12 @@ import com.benny.library.kbinding.view.setContentView
 import com.example.kotlin.R
 import com.example.kotlin.view.component.NavHeaderComponent
 import com.example.kotlin.view.component.TitleToolBarView
-import com.example.kotlin.view.extension.checkedChange
-import com.example.kotlin.view.extension.redButtonComponent
-import com.example.kotlin.view.extension.sampleButton
-import com.example.kotlin.view.extension.shineButton
+import com.example.kotlin.view.extension.*
 import com.example.kotlin.viewmodel.MainActivityViewModel
 import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.appBarLayout
+import org.jetbrains.anko.design.bottomNavigationView
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.design.navigationView
 import org.jetbrains.anko.support.v4.drawerLayout
@@ -113,8 +111,15 @@ class MainActivity : BaseActivity(), AnkoLogger {
                                 bind { click(k_getSampleButtonClick) }
                             }.lparams(matchParent, wrapContent)
                         }
-                    }.lparams(matchParent, matchParent) {
+                    }.lparams(matchParent, wrapContent) {
                         behavior = AppBarLayout.ScrollingViewBehavior()
+                    }
+                    bottomNavigationView {
+                        inflateMenu(R.menu.item_bottom_navigation)
+                        itemBackgroundResource = R.color.colorPrimary
+                        bind { itemSelect(k_bottomNavigationItemSelect) }
+                    }.lparams(matchParent, wrapContent) {
+                        gravity = Gravity.BOTTOM
                     }
                 }.lparams(matchParent, matchParent)
                 navigationView {
