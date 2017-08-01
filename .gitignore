@@ -4,5 +4,4 @@
 /build
 /captures
 .externalNativeBuild
-gradle/
 .gradle/
