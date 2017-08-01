@@ -17,6 +17,9 @@ import kotlin.properties.Delegates
 
 class MainActivityViewModel(baseActivity: BaseActivity) : ActivityViewModel(baseActivity) {
 
+    @delegate:Property
+    var name: String by Delegates.property("hoge@example.com")
+
     override fun onStart() {
         Log.d("SampleApp", "MainActivityViewModel#onStart")
     }
@@ -32,9 +35,6 @@ class MainActivityViewModel(baseActivity: BaseActivity) : ActivityViewModel(base
     override fun onStop() {
         Log.d("SampleApp", "MainActivityViewModel#onStop")
     }
-
-    @delegate:Property
-    var name: String by Delegates.property("hoge@example.com")
 
     @Command
     fun sampleButtonClick() {
