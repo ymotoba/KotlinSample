@@ -4,8 +4,8 @@ import android.util.Log
 import android.view.MenuItem
 import com.benny.library.kbinding.annotation.Command
 import com.benny.library.kbinding.annotation.Property
-import com.benny.library.kbinding.viewmodel.ViewModel
 import com.example.kotlin.R
+import com.example.kotlin.activity.BaseActivity
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.rx.rx_object
@@ -15,9 +15,19 @@ import io.reactivex.schedulers.Schedulers
 import java.io.Reader
 import kotlin.properties.Delegates
 
-class MainActivityViewModel() : ViewModel() {
+class MainActivityViewModel(baseActivity: BaseActivity) : ActivityViewModel(baseActivity) {
 
-    // TODO ViewModelにはContext持たせる
+    override fun onStart() {
+    }
+
+    override fun onResume() {
+    }
+
+    override fun onPause() {
+    }
+
+    override fun onStop() {
+    }
 
     @delegate:Property
     var name: String by Delegates.property("hoge@example.com")
@@ -35,7 +45,7 @@ class MainActivityViewModel() : ViewModel() {
     @Command
     fun getSampleButtonClick() {
         Log.d("MainActivityViewModel", "getSampleButtonClick!!!")
-        "http://10.0.2.2:3000/users".httpGet().rx_object(User.Deserializer())
+        "${baseActivity.getString(R.string.api_base)}/users".httpGet().rx_object(User.Deserializer())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { result ->

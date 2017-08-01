@@ -2,11 +2,11 @@ package com.example.kotlin.view.rxbinding
 
 
 import android.support.annotation.CheckResult
-import com.jakewharton.rxbinding.internal.MainThreadSubscription
 import com.jakewharton.rxbinding.internal.Preconditions.checkUiThread
 import com.sackcentury.shinebuttonlib.ShineButton
 import rx.Observable
 import rx.Subscriber
+import rx.android.MainThreadSubscription
 
 class ShineButtonCheckStateChangeOnSubscribe private constructor(private val shineButton: ShineButton) : Observable.OnSubscribe<Boolean> {
 

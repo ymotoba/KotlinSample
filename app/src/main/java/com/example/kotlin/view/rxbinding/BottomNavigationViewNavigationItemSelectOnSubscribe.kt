@@ -4,10 +4,10 @@ package com.example.kotlin.view.rxbinding
 import android.support.annotation.CheckResult
 import android.support.design.widget.BottomNavigationView
 import android.view.MenuItem
-import com.jakewharton.rxbinding.internal.MainThreadSubscription
 import com.jakewharton.rxbinding.internal.Preconditions.checkUiThread
 import rx.Observable
 import rx.Subscriber
+import rx.android.MainThreadSubscription
 
 class BottomNavigationViewNavigationItemSelectOnSubscribe private constructor(private val bottomNavigationView: BottomNavigationView) : Observable.OnSubscribe<MenuItem> {
 

@@ -37,11 +37,12 @@ class MainActivity : BaseActivity(), AnkoLogger {
 
     lateinit var toolBar: Toolbar
     lateinit var drawerLayout: DrawerLayout
-    var mainActivityViewModel: MainActivityViewModel = MainActivityViewModel()
+    var mainActivityViewModel: MainActivityViewModel = MainActivityViewModel(this@MainActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MainActivityUI().setContentView(this).bindTo(mainActivityViewModel)
+        bindViewModel(mainActivityViewModel)
         setSupportActionBar(toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(false)
