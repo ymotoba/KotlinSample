@@ -18,15 +18,19 @@ import kotlin.properties.Delegates
 class MainActivityViewModel(baseActivity: BaseActivity) : ActivityViewModel(baseActivity) {
 
     override fun onStart() {
+        Log.d("SampleApp", "MainActivityViewModel#onStart")
     }
 
     override fun onResume() {
+        Log.d("SampleApp", "MainActivityViewModel#onResume")
     }
 
     override fun onPause() {
+        Log.d("SampleApp", "MainActivityViewModel#onPause")
     }
 
     override fun onStop() {
+        Log.d("SampleApp", "MainActivityViewModel#onStop")
     }
 
     @delegate:Property
