@@ -1,61 +1,30 @@
 package com.example.kotlin.activity
 
-import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBar
-import android.support.v7.widget.Toolbar
-import android.util.Log
-import android.view.Gravity
+import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.benny.library.kbinding.common.bindings.click
-import com.benny.library.kbinding.common.bindings.text
-import com.benny.library.kbinding.dsl.OneWay
-import com.benny.library.kbinding.dsl.bind
-import com.benny.library.kbinding.dsl.inflate
-import com.benny.library.kbinding.view.ViewBinderComponent
-import com.benny.library.kbinding.view.setContentView
 import com.example.kotlin.R
-import com.example.kotlin.view.component.NavHeaderComponent
-import com.example.kotlin.view.component.TitleToolBarView
-import com.example.kotlin.view.extension.*
-import com.example.kotlin.viewmodel.MainActivityViewModel
-import com.example.kotlin.viewmodel.`MainActivityViewModel$$KB`.*
-import org.jetbrains.anko.*
-import org.jetbrains.anko.design.appBarLayout
-import org.jetbrains.anko.design.bottomNavigationView
-import org.jetbrains.anko.design.coordinatorLayout
-import org.jetbrains.anko.design.navigationView
-import org.jetbrains.anko.support.v4.drawerLayout
-import org.jetbrains.anko.support.v4.nestedScrollView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
-class MainActivity : BaseActivity(), AnkoLogger {
-
-    lateinit var toolBar: Toolbar
-    lateinit var drawerLayout: DrawerLayout
-    var mainActivityViewModel: MainActivityViewModel = MainActivityViewModel(this@MainActivity)
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainActivityUI().setContentView(this).bindTo(mainActivityViewModel)
-        bindViewModel(mainActivityViewModel)
-        setSupportActionBar(toolBar)
+        setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(false)
         supportActionBar?.setDisplayOptions(0, ActionBar.DISPLAY_SHOW_TITLE);
-        toolBar.setNavigationIcon(android.R.drawable.sym_def_app_icon)
-        toolBar.setNavigationOnClickListener {
-            Log.d("MainActivity", "NavigationOnClick!!!")
-            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                drawerLayout.closeDrawer(GravityCompat.START)
-            } else {
-                drawerLayout.openDrawer(GravityCompat.START)
-            }
-        }
+        toolbar.setNavigationIcon(android.R.drawable.sym_def_app_icon)
+        val toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,80 +33,6 @@ class MainActivity : BaseActivity(), AnkoLogger {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-        // TODO compilation error occurs...
-//            R.id.nav_camera -> verbose("-> camera")
-//            R.id.nav_gallery -> debug("-> gallery")
-//            R.id.nav_slideshow -> info("-> slideshow")
-//            R.id.nav_manage -> warn("-> manage")
-//            R.id.nav_share -> error("-> share")
-//            R.id.nav_send -> wtf("-> send")
-        }
-        drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
-    inner class MainActivityUI : ViewBinderComponent<MainActivity> {
-        override fun builder(): AnkoContext<out MainActivity>.() -> Unit = {
-            drawerLayout = drawerLayout {
-                coordinatorLayout {
-                    appBarLayout {
-                        toolBar = inflate(TitleToolBarView("home"), this@appBarLayout) as Toolbar
-                    }.lparams(matchParent, wrapContent)
-                    nestedScrollView {
-                        verticalLayout {
-                            textView {
-                                bind { text(k_name, mode = OneWay) }
-                            }.lparams(matchParent, wrapContent)
-                            button("テストボタン") {
-                                bind { click(k_sampleButtonClick) }
-                            }.lparams(matchParent, wrapContent)
-                            sampleButton {
-                                text = "サンプルボタン"
-                            }.lparams(matchParent, wrapContent)
-                            redButtonComponent() {
-                            }.lparams(matchParent, wrapContent)
-                            redButtonComponent() {
-                            }.lparams(matchParent, wrapContent)
-                            shineButton {
-                                setBtnColor(Color.GRAY)
-                                setBtnFillColor(Color.RED)
-                                setShapeResource(R.drawable.heart)
-                                bind { checkedChange(k_shineButtonCheckedChange) }
-                            }.lparams(dip(40), dip(40)) {
-                                gravity = Gravity.CENTER_HORIZONTAL
-                            }
-                            sampleButton {
-                                text = "users api"
-                                bind { click(k_getSampleButtonClick) }
-                            }.lparams(matchParent, wrapContent)
-                        }
-                    }.lparams(matchParent, wrapContent) {
-                        behavior = AppBarLayout.ScrollingViewBehavior()
-                    }
-                    bottomNavigationView {
-                        inflateMenu(R.menu.item_bottom_navigation)
-                        itemBackgroundResource = R.color.colorPrimary
-                        bind { itemSelect(k_bottomNavigationItemSelect) }
-                    }.lparams(matchParent, wrapContent) {
-                        gravity = Gravity.BOTTOM
-                    }
-                }.lparams(matchParent, matchParent)
-                navigationView {
-                    fitsSystemWindows = true
-                    val headerContext = AnkoContext.create(ctx, this)
-                    val headerView = NavHeaderComponent()
-                            .createView(headerContext)
-                    addHeaderView(headerView)
-                    inflateMenu(R.menu.activity_main_drawer)
-                }.lparams(wrapContent, matchParent, GravityCompat.START)
-            }
-        }
-    }
 }
-
-//verticalLayout {
-//    backgroundDrawable = ContextCompat.getDrawable(this@MainActivity, R.drawable.side_nav_bar)
-//}.layoutParams = with(FrameLayout.LayoutParams(matchParent, dimen(R.dimen.nav_header_height))) {
-//    this
-//}
