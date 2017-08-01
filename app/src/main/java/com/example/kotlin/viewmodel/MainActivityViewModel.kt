@@ -6,6 +6,7 @@ import com.benny.library.kbinding.annotation.Command
 import com.benny.library.kbinding.annotation.Property
 import com.example.kotlin.R
 import com.example.kotlin.activity.BaseActivity
+import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.rx.rx_object
@@ -53,14 +54,15 @@ class MainActivityViewModel(baseActivity: BaseActivity) : ActivityViewModel(base
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { result ->
-                    val responseJsonData: Array<User>? = result.component1()
-                    if (responseJsonData != null) {
+                    val (responseJsonData: Array<User>?, err: FuelError?) = result
+                    if (err != null) {
+                        err.printStackTrace()
+                    } else if (responseJsonData != null) {
                         for (user in responseJsonData) {
                             Log.d("apiUsersButtonClick", "result = ${user.toString()}")
                             name = user.name
                         }
                     }
-                    result.component2()
                 }
     }
 
