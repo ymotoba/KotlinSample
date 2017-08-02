@@ -10,12 +10,14 @@ import com.example.kotlin.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Fabric.with(this, Crashlytics())
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         sample_text_view.text = "更新されるの？"
+
+        exceptionButton.setOnClickListener {
+            throw RuntimeException()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
